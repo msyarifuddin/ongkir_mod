@@ -168,6 +168,39 @@ class HomeView extends GetView<HomeController> {
           SizedBox(
             height: 20,
           ),
+          DropdownSearch<Map<String, dynamic>>(
+            items: [
+              {
+                "code": "jne",
+                "name": "JNE",
+              },
+              {
+                "code": "pos",
+                "name": "POS Indonesia",
+              },
+              {
+                "code": "tiki",
+                "name": "TIKI",
+              },
+            ],
+            popupProps: PopupProps.menu(
+              itemBuilder: (context, item, isSelected) {
+                return ListTile(
+                  title: Text("${item['name']}"),
+                );
+              },
+            ),
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              dropdownSearchDecoration: InputDecoration(
+                labelText: "Kurir",
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 15,
+                ),
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
           ElevatedButton(
             onPressed: () {},
             child: Text(
