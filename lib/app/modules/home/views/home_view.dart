@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 
 import '../../../data/models/province_model.dart';
 import '../../../data/models/city_model.dart';
+import 'package:http/http.dart' as http;
 
 class HomeView extends GetView<HomeController> {
   // final HomeController homeC = get.lazyput(HomeController());
@@ -24,15 +27,12 @@ class HomeView extends GetView<HomeController> {
         children: [
           DropdownSearch<Province>(
               asyncItems: (text) async {
-                print("Run");
                 var response = await Dio().get(
                   "https://api.rajaongkir.com/starter/province",
                   queryParameters: {
                     "key": "566430af179baa880bfa80cc68d54c30",
                   },
                 );
-                // print(response);
-                // return [];
                 return Province.fromJsonList(
                   response.data["rajaongkir"]["results"],
                 );
@@ -232,7 +232,14 @@ class HomeView extends GetView<HomeController> {
             child: Text(
               "Cek Ongkir",
             ),
-          )
+          ),
+          // SizedBox(
+          //   height: 20,
+          // ),
+          // ElevatedButton(
+          //   onPressed: () {},
+          //   child: Text("Get Prov"),
+          // ),
         ],
       ),
     );

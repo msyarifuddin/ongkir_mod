@@ -102,6 +102,7 @@ class HomeController extends GetxController {
   // @override
   // void onInit() {
   //   super.onInit();
+  //   getProvInit();
   // }
 
   // @override
@@ -112,4 +113,29 @@ class HomeController extends GetxController {
   // @override
   // void onClose() {}
   // void increment() => count.value++;
+  // dynamic resp1 = "";
+  // List allProv = [];
+
+  // void getProvInit() async {
+  //   try {
+  //     // resp1 = await Dio().get(
+  //     //   "https://api.rajaongkir.com/starter/province",
+  //     //   queryParameters: {
+  //     //     "key": "566430af179baa880bfa80cc68d54c30",
+  //     //   },
+  //     // );
+  //     resp1 = http.get(
+  //       Uri.parse("https://api.rajaongkir.com/starter/province"),
+  //       headers: {
+  //         "key": "566430af179baa880bfa80cc68d54c30",
+  //       },
+  //     );
+  //     print(resp1.body["rajaongkir"]["result"]);
+  //     // List data = (json.decode(resp1.body) as Map<String, dynamic>)["data"];
+  //     // ["rajaongkir"]["results"]
+  //   } catch (e) {
+  //     print("Terjadi Kesalahan");
+  //     print(e);
+  //   }
+  // }
 }
