@@ -78,7 +78,7 @@ class HomeView extends GetView<HomeController> {
               itemBuilder: (context, item, isSelected) {
                 return ListTile(
                   title: Text(
-                    "${item.cityName}",
+                    "${item.type} ${item.cityName}",
                   ),
                 );
               },
@@ -91,7 +91,9 @@ class HomeView extends GetView<HomeController> {
                 border: OutlineInputBorder(),
               ),
             ),
-            onChanged: (value) {},
+            onChanged: (value) {
+              controller.cityAsalID.value = value?.cityId ?? "0";
+            },
           ),
           SizedBox(
             height: 20,
@@ -150,7 +152,7 @@ class HomeView extends GetView<HomeController> {
               itemBuilder: (context, item, isSelected) {
                 return ListTile(
                   title: Text(
-                    "${item.cityName}",
+                    "${item.type} ${item.cityName}",
                   ),
                 );
               },
@@ -163,7 +165,18 @@ class HomeView extends GetView<HomeController> {
                 border: OutlineInputBorder(),
               ),
             ),
-            onChanged: (value) {},
+            onChanged: (value) {
+              controller.cityTujuanID.value = value?.cityId ?? "0";
+            },
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          TextField(
+            controller: controller.beratC,
+            autocorrect: false,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(),
           ),
           SizedBox(
             height: 20,
@@ -200,9 +213,22 @@ class HomeView extends GetView<HomeController> {
                 border: OutlineInputBorder(),
               ),
             ),
+            onChanged: (value) {
+              controller.codeKurir.value = value?['code'] ?? "";
+            },
+            dropdownBuilder: (context, selectedItem) {
+              return Text(
+                "${selectedItem?['name'] ?? "Pilih Kurir"}",
+              );
+            },
+          ),
+          SizedBox(
+            height: 20,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              controller.cekOngkir();
+            },
             child: Text(
               "Cek Ongkir",
             ),

@@ -1,0 +1,10 @@
+{
+    "service": "OKE",
+    "description": "Ongkos Kirim Ekonomis",
+    "cost": [{
+            "value": 46000,
+            "etd": "4-5",
+            "note": ""
+        }
+    ]
+}
