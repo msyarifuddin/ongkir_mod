@@ -11,6 +11,7 @@ class HomeController extends GetxController {
   TextEditingController beratC = TextEditingController();
 
   List<Ongkir> ongkosKirim = [];
+  RxBool isLoading = false.obs;
 
   RxString provAsalID = "0".obs;
   RxString cityAsalID = "0".obs;
@@ -21,12 +22,12 @@ class HomeController extends GetxController {
   // RxString berat = "0".obs;
 
   void cekOngkir() async {
-    print("provasal " + provAsalID.value);
-    print("cityasal " + cityAsalID.value);
-    print("provtujuan " + provTujuanID.value);
-    print("citytujuan " + cityTujuanID.value);
-    print("berat " + beratC.text);
-    print("kurir " + codeKurir.value);
+    print("provasal= " + provAsalID.value);
+    print("cityasal= " + cityAsalID.value);
+    print("provtujuan= " + provTujuanID.value);
+    print("citytujuan= " + cityTujuanID.value);
+    print("berat= " + beratC.text);
+    print("kurir= " + codeKurir.value);
     if (provAsalID.value != "0" &&
         provTujuanID.value != "0" &&
         cityAsalID.value != "0" &&
@@ -35,19 +36,7 @@ class HomeController extends GetxController {
         beratC.text != "") {
       //eksekusi
       try {
-        // var response = Dio().post(
-        //   "https://api.rajaongkir.com/starter/cost",
-        //   data: {
-        //     "origin": cityAsalID.value,
-        //     "destination": cityTujuanID.value,
-        //     "weight": beratC.text,
-        //     "courier": codeKurir.value,
-        //   },
-        //   queryParameters: {
-        //     "key": "566430af179baa880bfa80cc68d54c30",
-        //     "content-type": "application/x-www-form-urlencoded",
-        //   },
-        // );
+        isLoading.value = true;
         var response = await http.post(
           Uri.parse("https://api.rajaongkir.com/starter/cost"),
           headers: {
@@ -62,11 +51,14 @@ class HomeController extends GetxController {
           },
         );
 
-        print(response.body);
-
-        List ongkir = json.decode(response.body)["rajaongkir"]["result"];
-        print(ongkir);
-        ongkosKirim = Ongkir.fromJsonList(ongkir);
+        print("resp=" + response.body);
+        print("----------------------");
+        isLoading.value = false;
+        List ongkir1 = json.decode(response.body)["rajaongkir"]["results"][0]
+                ["cost"] ??
+            [] as List;
+        print(ongkir1);
+        ongkosKirim = Ongkir.fromJsonList(ongkir1);
         Get.defaultDialog(
           title: "ONGKOS KIRIM",
           content: Column(
